@@ -6,7 +6,7 @@ config ZMK_USB
 
 if SHIELD_KUNIBOARD_LEFT
 
-config ZMK_KUNIBOARD
+config ZMK_KEYBOARD_NAME
 	default "Kuniboard"
 
 config ZMK_SPLIT_ROLE_CENTRAL
