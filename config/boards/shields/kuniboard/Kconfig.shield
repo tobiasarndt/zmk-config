@@ -1,0 +1,8 @@
+# Copyright (c) 2024 ZMK
+# SPDX-License-Identifier: MIT
+
+config SHIELD_KUNIBOARD_LEFT
+	def_bool $(shields_list_contains,kuniboard_left)
+
+config SHIELD_KUNIBOARD_RIGHT
+	def_bool $(shields_list_contains,kuniboard_right)
