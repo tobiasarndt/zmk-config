@@ -8,4 +8,4 @@ features:
     - keys
 siblings:
     - kuniboard_left
-    - kuniboard_right
+#    - kuniboard_right

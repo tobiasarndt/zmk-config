@@ -15,6 +15,6 @@
 include:
   - board: seeeduino_xiao_ble
     shield: kuniboard_left
-include:
-  - board: seeeduino_xiao_ble
-    shield: kuniboard_right
+#include:
+#  - board: seeeduino_xiao_ble
+#    shield: kuniboard_right
