@@ -3,8 +3,7 @@ id: kuniboard
 name: Kuniboard
 type: shield
 url: https://github.com/tobiasarndt/Kuniboard
-requires:
-    - seeed_xiao
+requires: [seeeduino_xiao_ble]
 features:
     - keys
 siblings:
