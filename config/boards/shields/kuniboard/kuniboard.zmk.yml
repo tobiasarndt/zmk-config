@@ -1,0 +1,14 @@
+file_format: "1"
+id: kuniboard
+name: Kuniboard
+type: shield
+url: https://github.com/tobiasarndt/Kuniboard
+requires:
+    - seeed_xiao
+    - nice_view
+features:
+    - keys
+    - display
+siblings:
+    - kuniboard_left
+    - kuniboard_right
