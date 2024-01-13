@@ -21,5 +21,3 @@
         , <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         ;
 };
-
-&xiao_spi { status = "disabled"; };
