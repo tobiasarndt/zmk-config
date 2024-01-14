@@ -13,11 +13,11 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            label = "Az123";
+            label = "Colemak DH Mod";
             bindings = <
-                &kp Q     &kp W      &kp E      &kp R      &kp T            &kp Y     &kp U      &kp I      &kp O      &kp P   
-                &kp A     &kp S      &kp D      &kp F      &kp G            &kp H     &kp J      &kp K      &kp L      &kp SEMI
-                &kp Z     &kp X      &kp C      &kp V      &kp B            &kp N     &kp M      &kp COMMA  &kp DOT    &kp FSLH
+                &kp Q     &kp W      &kp F      &kp P      &kp B            &kp J     &kp L      &kp U      &kp Z      &kp SEMI   
+                &kp A     &kp S      &kp R      &kp T      &kp G            &kp M     &kp N      &kp E      &kp I      &kp O
+                &kp Y     &kp X      &kp C      &kp D      &kp V            &kp K     &kp H      &kp COMMA  &kp DOT    &kp FSLH
                                      &kp BKSP   &kp TAB    &kp SPACE        &kp ENTER &kp M      &kp DEL
             >;
         };
