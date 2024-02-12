@@ -1,7 +1,7 @@
 # Copyright (c) 2024 ZMK
 # SPDX-License-Identifier: MIT
 
-if SHIELD_KUNIBOARD_LEFT
+if SHIELD_KUNIBOARD_RIGHT
 
 config ZMK_KEYBOARD_NAME
 	default "Kuniboard"
