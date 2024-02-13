@@ -10,5 +10,5 @@ features:
     - keys
     - display
 siblings:
-    - kuniboard_left
-#    - kuniboard_right
+#    - kuniboard_left
+    - kuniboard_right
