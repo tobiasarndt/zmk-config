@@ -14,6 +14,6 @@
 ---
 include:
   - board: seeeduino_xiao_ble
-    shield: kuniboard_left nice_view
+    shield: kuniboard_left nice_view settings_reset
   - board: seeeduino_xiao_ble
-    shield: kuniboard_right
+    shield: kuniboard_right settings_reset
