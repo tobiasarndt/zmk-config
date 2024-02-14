@@ -15,3 +15,11 @@
         , <&xiao_d 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         ;
 };
+
+nice_view_spi: &spi0 {
+    compatible = "nordic,nrf-spim";
+    mosi-pin = <&xiao_d 10 GPIO_ACTIVE_HIGH>;
+    sck-pin = <&xiao_d 9 GPIO_ACTIVE_HIGH>;
+    cs-gpios = <&xiao_d 8 GPIO_ACTIVE_HIGH>;
+
+}; 
