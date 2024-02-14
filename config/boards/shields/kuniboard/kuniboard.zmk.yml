@@ -11,4 +11,4 @@ features:
     - display
 siblings:
     - kuniboard_left
-#    - kuniboard_right
+    - kuniboard_right
