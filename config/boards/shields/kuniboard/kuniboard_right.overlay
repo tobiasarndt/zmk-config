@@ -7,7 +7,7 @@
 #include "kuniboard.dtsi"
 
 &default_transform {
-    row-offset = <6>;
+    row-offset = <5>;
 };
 
 &kscan0 {
