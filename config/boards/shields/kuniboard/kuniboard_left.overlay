@@ -19,14 +19,14 @@
 &pinctrl {
 	spi0_default: spi0_default {
 		group1 {
-			psels = <NRF_PSEL(SPIM_SCK, 0, 9)>,
-				<NRF_PSEL(SPIM_MOSI, 0, 10)>;
+			psels = <NRF_PSEL(SPIM_SCK, 0, 46)>,
+				<NRF_PSEL(SPIM_MOSI, 0, 47)>;
 		};
 	};
 	spi0_sleep: spi0_sleep {
 		group1 {
-			psels = <NRF_PSEL(SPIM_SCK, 0, 9)>,
-				<NRF_PSEL(SPIM_MOSI, 0, <&xiao_d 10 GPIO_ACTIVE_HIGH>)>;
+			psels = <NRF_PSEL(SPIM_SCK, 0, 46)>,
+				<NRF_PSEL(SPIM_MOSI, 0, 47)>;
 			low-power-enable;
 		};
 	};	
