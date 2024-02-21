@@ -12,9 +12,8 @@
 #     shield: reviung41
 #
 ---
-# include:
-#   - board: seeeduino_xiao_ble
-#     shield: kuniboard_left
 include:
- - board: seeeduino_xiao_ble
-   shield: kuniboard_right
+  - board: seeeduino_xiao_ble
+    shield: kuniboard_left
+  - board: seeeduino_xiao_ble
+    shield: kuniboard_right
