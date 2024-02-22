@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: MIT
  */
 
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
-#include "../../../includes/mouse_keys.dtsi"
-#include "../../../includes/mouse_tp.dtsi"
+#include <dt-bindings/zmk/bt.h>
 
 / {
     keymap {
@@ -19,7 +19,7 @@
                 &kp Q     &kp W      &kp F      &kp P      &kp B            &kp J     &kp L      &kp U      &kp Z      &kp SEMI   
                 &kp A     &kp S      &kp R      &kp T      &kp G            &kp M     &kp N      &kp E      &kp I      &kp O
                 &kp Y     &kp X      &kp C      &kp D      &kp V            &kp K     &kp H      &kp COMMA  &kp DOT    &kp FSLH
-                                     &kp BKSP   &kp TAB    &kp SPACE        &kp ENTER &kp M      &kp DEL
+                                     &kp TAB    &bt BT_CLR &kp ENTER        &kp DEL   &bt BT_CLR &kp ESC
             >;
         };
     };

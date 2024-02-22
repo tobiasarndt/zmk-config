@@ -8,5 +8,5 @@ requires:
 features:
     - keys
 siblings:
-#    - kuniboard_left
+    - kuniboard_left
     - kuniboard_right
