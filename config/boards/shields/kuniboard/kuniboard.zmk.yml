@@ -5,7 +5,6 @@ type: shield
 url: https://github.com/tobiasarndt/Kuniboard
 requires: 
     - seeeduino_xiao_ble
-    - nice_view
 features:
     - keys
     - display

@@ -8,6 +8,18 @@ config ZMK_KEYBOARD_NAME
 
 config ZMK_SPLIT_ROLE_CENTRAL
 	default y
+
+config ZMK_DISPLAY
+	select LV_FONT_MONTSERRAT_28
+
+if ZMK_DISPLAY
+
+config SPI
+	default y
+
+config LS0XX
+	default y
+endif # ZMK_DISPLAY
 endif
 
 if SHIELD_KUNIBOARD_LEFT || SHIELD_KUNIBOARD_RIGHT

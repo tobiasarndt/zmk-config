@@ -39,7 +39,7 @@ ZMK_BEHAVIOR(hml, hold_tap,
 /* right-hand HRMs */
 ZMK_BEHAVIOR(hmr, hold_tap,
     flavor = "balanced";
-    tapping-term-ms = <280>;
+    tapping-term-ms = <200>;
     quick-tap-ms = <175>;                // repeat on tap-into-hold
     require-prior-idle-ms = <150>;
     bindings = <&kp>, <&kp>;
@@ -170,11 +170,13 @@ ZMK_BEHAVIOR(hmr, hold_tap,
 };
 
 &mt {
-    quick-tap-ms = <175>;
+    flavor = "balanced";
+    quick-tap-ms = <200>;
 };
 
 &lt {
-    quick-tap-ms = <175>;
+    flavor = "balanced";
+    quick-tap-ms = <200>;
 };
 
 / {
@@ -185,7 +187,7 @@ ZMK_BEHAVIOR(hmr, hold_tap,
             label = "Colemak DH Mod";
             bindings = <
                 &kp DE_Q        &kp DE_W        &kp DE_F        &kp DE_P        &kp DE_B        &kp DE_J        &kp DE_L        &kp DE_U        &kp DE_Z        &slh_qu   
-                &hml LGUI DE_A  &hml LALT DE_S  &hml LCTRL DE_R &hml LSHFT DE_T &kp DE_G        &kp DE_M        &hml RSHFT DE_N &hml RCTRL DE_E &hml RALT DE_I  &hml RGUI DE_O
+                &hml LGUI DE_A  &hml LALT DE_S  &hml LCTRL DE_R &hml LSHFT DE_T &kp DE_G        &kp DE_M        &hml RSHFT DE_N &hml RCTRL DE_E &hml LALT DE_I  &hml RGUI DE_O
                 &kp DE_Y        &kp DE_X        &kp DE_C        &kp DE_D        &kp DE_V        &kp DE_K        &kp DE_H        &kp DE_COMMA    &kp DE_DOT      &kp DE_MINUS
                                 &kp TAB         &lt MOD BSPC    &kp ENTER       &lt NUM DEL     &mt RSHFT SPACE &kp ESC
             >;
@@ -197,12 +199,12 @@ ZMK_BEHAVIOR(hmr, hold_tap,
                 &kp DE_AT       &quote          &acu_grv        &kp DE_DLLR     &kp DE_PRCNT    &kp DE_AMPS     &kp DE_L        &kp DE_UE       &kp DE_Z        &kp DE_BSLH   
                 &kp DE_AE       &sz             &trans          &kp LEFT        &kp UP          &kp DOWN        &kp RIGHT       &kp DE_N        &kp DE_HASH     &kp DE_OE
                 &kp DE_PIPE     &kp DE_TILDE    &kp DE_CARET    &trans          &trans          &trans          &trans          &kp DE_LT       &kp DE_GT       &kp DE_PLUS
-                                &trans          &trans          &trans          &trans          &trans          &trans
+                                &trans          &trans          &trans          &trans          &caps_word          &trans
              >;
         };
 
         num_layer {
-            label = "Colemak DH Mod";
+            label = "Numbers";
             bindings = <
                 &kp DE_N1       &kp DE_N2       &kp DE_N3       &trans          &trans          &kp DE_EQUAL    &kp DE_PLUS     &kp DE_MINUS    &kp DE_ASTRK    &trans
                 &kp DE_N4       &kp DE_N5       &kp DE_N6       &kp HOME        &kp PG_UP       &kp PG_DN       &kp END         &trans          &trans          &trans
@@ -212,12 +214,12 @@ ZMK_BEHAVIOR(hmr, hold_tap,
         };
 
         base_osx_layer {
-            label = "Colemak DH Mod OSX";
+            label = "ColemakOSX";
             bindings = <
                 &kp DE_OSX_Q        &kp DE_OSX_W        &kp DE_OSX_F        &kp DE_OSX_P        &kp DE_OSX_B        &kp DE_OSX_J        &kp DE_OSX_L        &kp DE_OSX_U        &kp DE_OSX_Z        &slh_qu   
                 &hml LGUI DE_OSX_A  &hml LALT DE_OSX_S  &hml LCTRL DE_OSX_R &hml LSHFT DE_OSX_T &kp DE_OSX_G        &kp DE_OSX_M        &hml RSHFT DE_OSX_N &hml RCTRL DE_OSX_E &hml RALT DE_OSX_I  &hml RGUI DE_OSX_O
                 &kp DE_OSX_Y        &kp DE_OSX_X        &kp DE_OSX_C        &kp DE_OSX_D        &kp DE_OSX_V        &kp DE_OSX_K        &kp DE_OSX_H        &kp DE_OSX_COMMA    &kp DE_OSX_DOT      &kp DE_OSX_MINUS
-                                    &kp TAB             &lt MOD BSPC        &kp ENTER           &lt NUM DEL         &mt RSHFT SPACE     &kp ESC
+                                    &kp TAB             &lt MOD_OSX BSPC    &kp ENTER           &lt NUM_OSX DEL     &mt RSHFT SPACE     &kp ESC
             >;
         };
 
@@ -232,7 +234,7 @@ ZMK_BEHAVIOR(hmr, hold_tap,
         };
 
         num_osx_layer {
-            label = "Colemak DH Mod OSX";
+            label = "Numbers OSX";
             bindings = <
                 &kp DE_OSX_N1       &kp DE_OSX_N2       &kp DE_OSX_N3       &trans              &trans              &kp DE_OSX_EQUAL    &kp DE_OSX_PLUS     &kp DE_OSX_MINUS    &kp DE_OSX_ASTRK    &trans   
                 &kp DE_OSX_N4       &kp DE_OSX_N5       &kp DE_OSX_N6       &kp HOME            &kp PG_UP           &kp PG_DN           &kp END             &trans              &trans              &trans
@@ -246,7 +248,7 @@ ZMK_BEHAVIOR(hmr, hold_tap,
             bindings = <
                 &kp F1          &kp F2          &kp F3          &kp F10         &bt BT_NXT      &tog BASE_OSX   &trans          &trans          &trans          &trans   
                 &kp F4          &kp F5          &kp F6          &kp F11         &bt BT_PRV      &out OUT_TOG    &trans          &trans          &trans          &trans
-                &kp F7          &kp F8          &kp F9          &kp F12         &bt BT_CLR      &trans          &trans          &trans          &trans          &trans
+                &kp F7          &kp F8          &kp F9          &kp F12         &bt BT_CLR      &bt BT_CLR_ALL  &trans          &trans          &trans          &trans
                                 &trans          &trans          &trans          &trans          &trans          &trans
             >;
         };
