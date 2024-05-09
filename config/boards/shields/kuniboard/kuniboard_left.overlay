@@ -6,15 +6,17 @@
 
 #include "kuniboard.dtsi"
 
-&kscan0 {
-    gpios
-        = <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&xiao_d 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&xiao_d 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        ;
-};
+// &kscan0 {
+//     gpios
+//         = <&xiao_d 1 (GPIO_ACTIVE_HIGH)>
+//         , <&xiao_d 2 (GPIO_ACTIVE_HIGH)>
+//         , <&xiao_d 3 (GPIO_ACTIVE_HIGH)>
+//         , <&xiao_d 4 (GPIO_ACTIVE_HIGH)>
+//         , <&xiao_d 5 (GPIO_ACTIVE_HIGH)>
+//         // = <&xiao_d 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+//         // , <&xiao_d 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+//         ;
+// };
 
 
 &pinctrl {
@@ -32,7 +34,13 @@
 		};
 	};	
 };
-
+nice_view_spi: &spi0 {
+	compatible = "nordic,nrf-spim";
+	pinctrl-0 = <&spi0_default>;
+	pinctrl-1 = <&spi0_sleep>;
+	pinctrl-names = "default", "sleep";
+	cs-gpios = <&xiao_d 8 GPIO_ACTIVE_HIGH>;
+};
 display_spi: &spi0 {
 	compatible = "nordic,nrf-spim";
 	pinctrl-0 = <&spi0_default>;
@@ -40,7 +48,6 @@ display_spi: &spi0 {
 	pinctrl-names = "default", "sleep";
 	cs-gpios = <&xiao_d 8 GPIO_ACTIVE_HIGH>;
 };
-
 &display_spi {
 	status = "okay";
 	sharp: ls0xx@0 {
@@ -50,7 +57,6 @@ display_spi: &spi0 {
 		reg = <0>;
 		width = <160>;
 		height = <68>;
-		//disp-en-gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>; //testing setting this to 6 from 23
 	};
 };
 

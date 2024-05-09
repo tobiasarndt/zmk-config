@@ -1,0 +1,171 @@
+/*
+ * Copyright (c) 2024 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <zephyr/kernel.h>
+#include <zephyr/bluetooth/services/bas.h>
+
+#include <zephyr/logging/log.h>
+LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
+
+#include <zmk/display.h>
+#include <zmk/display/widgets/battery_status.h>
+#include <zmk/usb.h>
+#include <zmk/ble.h>
+#include <zmk/events/usb_conn_state_changed.h>
+#include <zmk/event_manager.h>
+#include <zmk/events/battery_state_changed.h>
+#include <zmk/events/split_peripheral_status_changed.h>
+#include <zmk/battery.h>
+#include <zmk/split/bluetooth/central.h>
+
+#include "battery_status.h"
+#include "util.h"
+
+static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
+
+struct battery_state {
+    uint8_t source;
+    uint8_t level;
+};
+struct connection_status_state {
+    bool connected;
+};
+
+// static lv_color_t battery_image_buffer[ZMK_SPLIT_BLE_PERIPHERAL_COUNT][5 * 8];
+
+// static void draw_battery(lv_obj_t *canvas, uint8_t level) {
+//     lv_canvas_fill_bg(canvas, lv_color_black(), LV_OPA_COVER);
+
+//     lv_draw_rect_dsc_t rect_fill_dsc;
+//     lv_draw_rect_dsc_init(&rect_fill_dsc);
+//     rect_fill_dsc.bg_color = lv_color_white();
+
+//     lv_canvas_set_px(canvas, 0, 0, lv_color_white());
+//     lv_canvas_set_px(canvas, 0, 4, lv_color_white());
+
+//     if (level > 90) {
+//         // full
+//     } else if (level > 70) {
+//         lv_canvas_draw_rect(canvas, 2, 1, 1, 3, &rect_fill_dsc);
+//     } else if (level > 50) {
+//         lv_canvas_draw_rect(canvas, 2, 1, 2, 3, &rect_fill_dsc);
+//     } else if (level > 30) {
+//         lv_canvas_draw_rect(canvas, 2, 1, 3, 3, &rect_fill_dsc);
+//     } else if (level > 10) {
+//         lv_canvas_draw_rect(canvas, 2, 1, 4, 3, &rect_fill_dsc);
+//     } else {
+//         lv_canvas_draw_rect(canvas, 2, 1, 5, 3, &rect_fill_dsc);
+//     }
+// }
+
+static void draw_batteries_widget(struct zmk_widget_batteries_status *widget) {
+    lv_canvas_set_buffer(widget->canvas, widget->cbuf, BATTERY_CANVAS_WIDTH, BATTERY_CANVAS_HEIGHT,
+                         LV_IMG_CF_TRUE_COLOR);
+
+    lv_canvas_fill_bg(widget->canvas, LVGL_BACKGROUND, LV_OPA_COVER);
+    lv_canvas_draw_text(widget->canvas, 0, 0, 33, &widget->central_label_dsc, widget->central_text);
+    if (widget->connected) {
+        lv_canvas_draw_text(widget->canvas, 35, 0, 33, &widget->peripheral_label_dsc,
+                            widget->peripheral_text);
+    }
+    rotate_canvas(widget->canvas, widget->cbuf, widget->cbuf_rot, BATTERY_CANVAS_WIDTH,
+                  BATTERY_CANVAS_HEIGHT);
+}
+
+static void set_battery_symbol(struct zmk_widget_batteries_status *widget,
+                               struct battery_state state) {
+    if (state.source == 0) {
+        strcpy(widget->central_text, "");
+        char perc[5] = {};
+        snprintf(perc, sizeof(perc), "%3u%%", state.level);
+        strcat(widget->central_text, perc);
+    }
+    if (state.source == 1) {
+        strcpy(widget->peripheral_text, "");
+        char perc[5] = {};
+        snprintf(perc, sizeof(perc), "%3u%%", state.level);
+        strcat(widget->peripheral_text, perc);
+    }
+    draw_batteries_widget(widget);
+}
+
+void battery_status_update_cb(struct battery_state state) {
+    struct zmk_widget_batteries_status *widget;
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_battery_symbol(widget, state); }
+}
+
+static struct battery_state peripheral_battery_status_get_state(const zmk_event_t *eh) {
+    const struct zmk_peripheral_battery_state_changed *ev =
+        as_zmk_peripheral_battery_state_changed(eh);
+    LOG_WRN("Peripheral Charge: %3u%%", ev->state_of_charge);
+    return (struct battery_state){
+        .source = 1,
+        .level = ev->state_of_charge,
+    };
+}
+
+static struct battery_state battery_status_get_state(const zmk_event_t *eh) {
+    const struct zmk_battery_state_changed *ev = as_zmk_battery_state_changed(eh);
+    return (struct battery_state){
+        .source = 0,
+        .level = (ev != NULL) ? ev->state_of_charge : zmk_battery_state_of_charge(),
+    };
+}
+
+ZMK_DISPLAY_WIDGET_LISTENER(widget_peripheral_battery_status, struct battery_state,
+                            battery_status_update_cb, peripheral_battery_status_get_state)
+
+ZMK_SUBSCRIPTION(widget_peripheral_battery_status, zmk_peripheral_battery_state_changed);
+
+ZMK_DISPLAY_WIDGET_LISTENER(widget_battery_status, struct battery_state, battery_status_update_cb,
+                            battery_status_get_state)
+
+ZMK_SUBSCRIPTION(widget_battery_status, zmk_battery_state_changed);
+
+static void set_connection(struct zmk_widget_batteries_status *widget,
+                           struct connection_status_state state) {
+    widget->connected = state.connected;
+    uint8_t level;
+    zmk_split_get_peripheral_battery_level(0, &level);
+    set_battery_symbol(widget, (struct battery_state){
+                                   .source = 1,
+                                   .level = level,
+                               });
+    draw_batteries_widget(widget);
+}
+static void connection_status_update_cb(struct connection_status_state state) {
+    struct zmk_widget_batteries_status *widget;
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_connection(widget, state); }
+}
+
+static struct connection_status_state connection_status_get_state(const zmk_event_t *eh) {
+    struct zmk_split_peripheral_status_changed *ev = as_zmk_split_peripheral_status_changed(eh);
+    return (struct connection_status_state){.connected = ev->connected};
+}
+
+ZMK_DISPLAY_WIDGET_LISTENER(widget_battery_connection_status, struct connection_status_state,
+                            connection_status_update_cb, connection_status_get_state)
+
+ZMK_SUBSCRIPTION(widget_battery_connection_status, zmk_split_peripheral_status_changed);
+
+int zmk_widget_batteries_status_init(struct zmk_widget_batteries_status *widget, lv_obj_t *parent) {
+    sys_slist_append(&widgets, &widget->node);
+    widget->canvas = lv_canvas_create(parent);
+    init_label_dsc(&widget->central_label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_12,
+                   LV_TEXT_ALIGN_LEFT);
+    init_label_dsc(&widget->peripheral_label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_12,
+                   LV_TEXT_ALIGN_RIGHT);
+
+    widget_battery_status_init();
+    widget_peripheral_battery_status_init();
+    widget_battery_connection_status_init();
+
+    return 0;
+}
+
+lv_obj_t *zmk_widget_batteries_status_obj(struct zmk_widget_batteries_status *widget) {
+    return widget->canvas;
+}

@@ -77,45 +77,50 @@ ZMK_BEHAVIOR(hmr, hold_tap,
 };
 
 / {
+    prog_caps: prog_caps {
+        compatible = "zmk,behavior-caps-word";
+        #binding-cells = <0>;
+        continue-list = <UNDERSCORE>;
+    };
+
     combos {
         compatible = "zmk,combos";
         lbkt {
-            timeout-ms = <50>;
+            timeout-ms = <40>;
             key-positions = <LT1 LT2>;
             bindings = <&kp DE_LBKT>;
             layers = <0>;
         };
         rbkt {
-            timeout-ms = <50>;
+            timeout-ms = <40>;
             key-positions = <RT1 RT2>;
             bindings = <&kp DE_RBKT>;
             layers = <0>;
         };
         lpar {
-            timeout-ms = <50>;
+            timeout-ms = <40>;
             key-positions = <LM1 LM2>;
             bindings = <&kp DE_LPAR>;
             layers = <0>;
         };
         rpar {
-            timeout-ms = <50>;
+            timeout-ms = <40>;
             key-positions = <RM1 RM2>;
             bindings = <&kp DE_RPAR>;
             layers = <0>;
         };
         lbrc {
-            timeout-ms = <50>;
+            timeout-ms = <40>;
             key-positions = <LB1 LB2>;
             bindings = <&kp DE_LBRC>;
             layers = <0>;
         };
         rbrc {
-            timeout-ms = <50>;
+            timeout-ms = <40>;
             key-positions = <RB1 RB2>;
             bindings = <&kp DE_RBRC>;
             layers = <0>;
         };
-        compatible = "zmk,combos";
         lbkt_osx {
             timeout-ms = <50>;
             key-positions = <LT1 LT2>;
@@ -152,6 +157,12 @@ ZMK_BEHAVIOR(hmr, hold_tap,
             bindings = <&kp DE_OSX_RBRC>;
             layers = <3>;
         };
+        caps_word {
+            timeout-ms = <50>;
+            key-positions = <LH0 RH1>;
+            bindings = <&prog_caps>;
+            layers = <0 1 2 3 4 5>;
+        };
     };
 };
 
@@ -171,12 +182,12 @@ ZMK_BEHAVIOR(hmr, hold_tap,
 
 &mt {
     flavor = "balanced";
-    quick-tap-ms = <200>;
+    quick-tap-ms = <150>;
 };
 
 &lt {
     flavor = "balanced";
-    quick-tap-ms = <200>;
+    quick-tap-ms = <150>;
 };
 
 / {
@@ -184,27 +195,27 @@ ZMK_BEHAVIOR(hmr, hold_tap,
         compatible = "zmk,keymap";
 
         base_layer {
-            label = "Colemak DH Mod";
+            label = "Base";
             bindings = <
                 &kp DE_Q        &kp DE_W        &kp DE_F        &kp DE_P        &kp DE_B        &kp DE_J        &kp DE_L        &kp DE_U        &kp DE_Z        &slh_qu   
                 &hml LGUI DE_A  &hml LALT DE_S  &hml LCTRL DE_R &hml LSHFT DE_T &kp DE_G        &kp DE_M        &hml RSHFT DE_N &hml RCTRL DE_E &hml LALT DE_I  &hml RGUI DE_O
                 &kp DE_Y        &kp DE_X        &kp DE_C        &kp DE_D        &kp DE_V        &kp DE_K        &kp DE_H        &kp DE_COMMA    &kp DE_DOT      &kp DE_MINUS
-                                &kp TAB         &lt MOD BSPC    &kp ENTER       &lt NUM DEL     &mt RSHFT SPACE &kp ESC
+                                &lt NUM TAB     &lt MOD BSPC    &mt LSHFT ENTER &lt NUM DEL     &mt RSHFT SPACE &kp ESC
             >;
         };
 
         mod_layer {
-            label = "Umlaute and Modifiers";
+            label = "Sym";
             bindings = <
                 &kp DE_AT       &quote          &acu_grv        &kp DE_DLLR     &kp DE_PRCNT    &kp DE_AMPS     &kp DE_L        &kp DE_UE       &kp DE_Z        &kp DE_BSLH   
                 &kp DE_AE       &sz             &trans          &kp LEFT        &kp UP          &kp DOWN        &kp RIGHT       &kp DE_N        &kp DE_HASH     &kp DE_OE
                 &kp DE_PIPE     &kp DE_TILDE    &kp DE_CARET    &trans          &trans          &trans          &trans          &kp DE_LT       &kp DE_GT       &kp DE_PLUS
-                                &trans          &trans          &trans          &trans          &caps_word          &trans
+                                &trans          &trans          &trans          &trans          &trans          &trans
              >;
         };
 
         num_layer {
-            label = "Numbers";
+            label = "Num";
             bindings = <
                 &kp DE_N1       &kp DE_N2       &kp DE_N3       &trans          &trans          &kp DE_EQUAL    &kp DE_PLUS     &kp DE_MINUS    &kp DE_ASTRK    &trans
                 &kp DE_N4       &kp DE_N5       &kp DE_N6       &kp HOME        &kp PG_UP       &kp PG_DN       &kp END         &trans          &trans          &trans
@@ -244,7 +255,7 @@ ZMK_BEHAVIOR(hmr, hold_tap,
         };
 
         adj_layer {
-            label = "FN Keys and BT CTR";
+            label = "Fun";
             bindings = <
                 &kp F1          &kp F2          &kp F3          &kp F10         &bt BT_NXT      &tog BASE_OSX   &trans          &trans          &trans          &trans   
                 &kp F4          &kp F5          &kp F6          &kp F11         &bt BT_PRV      &out OUT_TOG    &trans          &trans          &trans          &trans
