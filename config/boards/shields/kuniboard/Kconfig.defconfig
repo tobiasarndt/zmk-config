@@ -29,8 +29,13 @@ config ZMK_SPLIT
 
 endif
 
+config KUNIBOARD_CUSTOM_DISPLAY_ROTATE_CLOCKWISE
+    bool "rotate the display counterclockwise"
+    default n
+
 config KUNIBOARD_CUSTOM_DISPLAY
     bool "use custom kuniboard display"
+    default n
 
 if KUNIBOARD_CUSTOM_DISPLAY
 
@@ -40,6 +45,9 @@ if KUNIBOARD_CUSTOM_DISPLAY
     choice ZMK_DISPLAY_STATUS_SCREEN
         default ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
     endchoice
+
+    config ZMK_DISPLAY_BLANK_ON_IDLE
+        default n
 
     config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING
         default y

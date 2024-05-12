@@ -13,11 +13,19 @@
 void rotate_canvas(lv_obj_t *canvas, lv_color_t cbuf[], lv_color_t cbuf_rot[], uint8_t width,
                    uint8_t height) {
 
+#if CONFIG_KUNIBOARD_CUSTOM_DISPLAY_ROTATE_CLOCKWISE
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            cbuf_rot[i * height + (height - 1 - j)] = cbuf[i + j * width];
+        }
+    }
+#else
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             cbuf_rot[(width - i - 1) * height + j] = cbuf[i + j * width];
         }
     }
+#endif
 
     lv_canvas_set_buffer(canvas, cbuf_rot, height, width, LV_IMG_CF_TRUE_COLOR);
 }

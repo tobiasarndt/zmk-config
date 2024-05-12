@@ -1,7 +1,7 @@
 # Copyright (c) 2020 The ZMK Contributors
 # SPDX-License-Identifier: MIT
 
-if(CONFIG_ZMK_DISPLAY AND CONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM AND CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
+if(CONFIG_ZMK_DISPLAY AND CONFIG_KUNIBOARD_CUSTOM_DISPLAY AND CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
     zephyr_library()
     zephyr_library_sources(${ZEPHYR_BASE}/misc/empty_file.c)
     zephyr_library_include_directories(${ZEPHYR_LVGL_MODULE_DIR})
