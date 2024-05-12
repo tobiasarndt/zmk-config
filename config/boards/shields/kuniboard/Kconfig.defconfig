@@ -26,18 +26,21 @@ if SHIELD_KUNIBOARD_LEFT || SHIELD_KUNIBOARD_RIGHT
 
 config ZMK_SPLIT
 	default y
-
 endif
-
-config KUNIBOARD_CUSTOM_DISPLAY_ROTATE_CLOCKWISE
-    bool "rotate the display counterclockwise"
-    default n
 
 config KUNIBOARD_CUSTOM_DISPLAY
     bool "use custom kuniboard display"
     default n
 
 if KUNIBOARD_CUSTOM_DISPLAY
+
+    config KUNIBOARD_CUSTOM_DISPLAY_ROTATE_CLOCKWISE
+        bool "rotate the display counterclockwise"
+        default n
+
+    config RIGHT_SIDE_CENTRAL
+        bool "right side central"
+        default n
 
     config CONFIG_KUNIBOARD_SCREEN_INVERTED
         bool "invert kuniboard display color"

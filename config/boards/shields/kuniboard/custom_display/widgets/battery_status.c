@@ -66,11 +66,19 @@ static void draw_batteries_widget(struct zmk_widget_batteries_status *widget) {
                          LV_IMG_CF_TRUE_COLOR);
 
     lv_canvas_fill_bg(widget->canvas, LVGL_BACKGROUND, LV_OPA_COVER);
+    #if CONFIG_RIGHT_SIDE_CENTRAL
+    lv_canvas_draw_text(widget->canvas, 35, 0, 33, &widget->central_label_dsc, widget->central_text);
+    if (widget->connected) {
+        lv_canvas_draw_text(widget->canvas, 0, 0, 33, &widget->peripheral_label_dsc,
+                            widget->peripheral_text);
+    }
+    #else
     lv_canvas_draw_text(widget->canvas, 0, 0, 33, &widget->central_label_dsc, widget->central_text);
     if (widget->connected) {
         lv_canvas_draw_text(widget->canvas, 35, 0, 33, &widget->peripheral_label_dsc,
                             widget->peripheral_text);
     }
+    #endif
     rotate_canvas(widget->canvas, widget->cbuf, widget->cbuf_rot, BATTERY_CANVAS_WIDTH,
                   BATTERY_CANVAS_HEIGHT);
 }
@@ -154,10 +162,18 @@ ZMK_SUBSCRIPTION(widget_battery_connection_status, zmk_split_peripheral_status_c
 int zmk_widget_batteries_status_init(struct zmk_widget_batteries_status *widget, lv_obj_t *parent) {
     sys_slist_append(&widgets, &widget->node);
     widget->canvas = lv_canvas_create(parent);
+
+#if CONFIG_RIGHT_SIDE_CENTRAL
+    init_label_dsc(&widget->central_label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_12,
+                   LV_TEXT_ALIGN_RIGHT);
+    init_label_dsc(&widget->peripheral_label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_12,
+                   LV_TEXT_ALIGN_LEFT);
+#else
     init_label_dsc(&widget->central_label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_12,
                    LV_TEXT_ALIGN_LEFT);
     init_label_dsc(&widget->peripheral_label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_12,
                    LV_TEXT_ALIGN_RIGHT);
+#endif
 
     widget_battery_status_init();
     widget_peripheral_battery_status_init();

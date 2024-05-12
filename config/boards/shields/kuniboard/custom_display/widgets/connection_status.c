@@ -24,6 +24,7 @@ struct connection_status_state {
 
 LV_IMG_DECLARE(keyboard_pictogram_large);
 LV_IMG_DECLARE(not_connected_pictogram_large);
+LV_IMG_DECLARE(not_connected_pictogram_large_left);
 
 static void set_connection_img(struct zmk_widget_connection_status *widget,
                                struct connection_status_state state) {
@@ -58,8 +59,21 @@ int zmk_widget_connection_status_init(struct zmk_widget_connection_status *widge
     lv_img_set_src(widget->art, &keyboard_pictogram_large);
     lv_obj_align(widget->art, LV_ALIGN_TOP_LEFT, 0, 0);
     widget->not_connected = lv_img_create(widget->obj);
-    lv_img_set_src(widget->not_connected, &not_connected_pictogram_large);
+#if CONFIG_RIGHT_SIDE_CENTRAL
+    lv_img_set_src(widget->not_connected, &not_connected_pictogram_large_left);
+#if CONFIG_KUNIBOARD_CUSTOM_DISPLAY_ROTATE_CLOCKWISE
     lv_obj_align(widget->not_connected, LV_ALIGN_TOP_LEFT, 0, 0);
+#else
+    lv_obj_align(widget->not_connected, LV_ALIGN_BOTTOM_LEFT, 0, 0);
+#endif
+#else
+    lv_img_set_src(widget->not_connected, &not_connected_pictogram_large);
+#if CONFIG_KUNIBOARD_CUSTOM_DISPLAY_ROTATE_CLOCKWISE
+    lv_obj_align(widget->not_connected, LV_ALIGN_BOTTOM_LEFT, 0, 0);
+#else  
+    lv_obj_align(widget->not_connected, LV_ALIGN_TOP_LEFT, 0, 0);
+#endif
+#endif
     lv_obj_add_flag(widget->not_connected, LV_OBJ_FLAG_HIDDEN);
 
     widget_connection_status_init();
