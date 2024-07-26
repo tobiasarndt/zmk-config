@@ -161,6 +161,24 @@ ZMK_BEHAVIOR(hmr, hold_tap,
             bindings = <&caps_word>;
             layers = <0 1 2 3 4 5>;
         };
+        play_pause {
+            timeout-ms = <50>;
+            key-positions = <LM1 LM3>;
+            bindings = <&kp C_PLAY_PAUSE>;
+            layers = <0>;
+        };
+        prev {
+            timeout-ms = <50>;
+            key-positions = <LT1 LT3>;
+            bindings = <&kp C_PREV>;
+            layers = <0>;
+        };
+        next {
+            timeout-ms = <50>;
+            key-positions = <LB1 LB3>;
+            bindings = <&kp C_NEXT>;
+            layers = <0>;
+        };
     };
 };
 
@@ -255,8 +273,8 @@ ZMK_BEHAVIOR(hmr, hold_tap,
         adj_layer {
             label = "Fun";
             bindings = <
-                &kp F1          &kp F2          &kp F3          &kp F10         &bt BT_NXT      &tog BASE_OSX   &trans          &trans          &trans          &trans   
-                &kp F4          &kp F5          &kp F6          &kp F11         &bt BT_PRV      &out OUT_TOG    &trans          &trans          &trans          &trans
+                &kp F1          &kp F2          &kp F3          &kp F10         &bt BT_NXT      &tog BASE_OSX   &trans          &trans          &trans          &kp PSCRN
+                &kp F4          &kp F5          &kp F6          &kp F11         &bt BT_PRV      &out OUT_TOG    &trans          &trans          &kp INSERT      &trans
                 &kp F7          &kp F8          &kp F9          &kp F12         &bt BT_CLR      &bt BT_CLR_ALL  &trans          &trans          &trans          &trans
                                 &trans          &trans          &trans          &trans          &trans          &trans
             >;
