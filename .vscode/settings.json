@@ -1,0 +1,25 @@
+{
+  "files.associations": {
+    "*.overlay": "dts",
+    "*.keymap": "dts",
+    "layer_status.h": "c",
+    "util.h": "c",
+    "connection_status.h": "c"
+  },
+  "python.formatting.provider": "black",
+  "[c]": {
+    "editor.formatOnSave": false
+  },
+  "[javascript][javascriptreact][typescript][typescriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "[css][json][jsonc][html][markdown][yaml]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
