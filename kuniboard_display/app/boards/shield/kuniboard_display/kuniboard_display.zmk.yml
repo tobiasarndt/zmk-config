@@ -1,0 +1,6 @@
+file_format: "1"
+id: kuniboard_display
+name: kuniboard_display
+type: shield
+features:
+  - display

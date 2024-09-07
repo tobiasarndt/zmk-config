@@ -1,0 +1,2 @@
+config SHIELD_KUNIBOARD_DISPLAY
+    def_bool $(shield_list_contains, kuniboard_display)

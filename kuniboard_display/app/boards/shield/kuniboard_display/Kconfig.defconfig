@@ -1,0 +1,63 @@
+# Copyright (c) 2024 ZMK
+# SPDX-License-Identifier: MIT
+
+config KUNIBOARD_DISPLAY_ROTATE_CLOCKWISE
+    bool "rotate the display counterclockwise"
+    default n
+
+config KUNIBOARD_DISPLAY_RIGHT_SIDE_CENTRAL
+    bool "right side central"
+    default n
+
+CONFIG KUNIBOARD_DISPLAY_SHOW_SLEEP_ART_ON_SLEEP
+    bool "whether the sleep art should be shown on idle"
+    default y
+
+CONFIG_KUNIBOARD_SCREEN_INVERTED
+    bool "invert kuniboard display color"
+    default n
+
+if SHIELD_NICE_PERI_VIEW
+
+    config ZMK_DISPLAY
+        select KUNIBOARD_DISPLAY
+
+    choice ZMK_DISPLAY_STATUS_SCREEN
+        default ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+    endchoice
+
+    config ZMK_DISPLAY_BLANK_ON_IDLE
+        default n
+
+    config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING
+        default y
+
+    config ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+        select LV_USE_LABEL
+        select LV_USE_IMG
+        select LV_USE_CANVAS
+        select LV_FONT_MONTSERRAT_16
+        select LV_FONT_MONTSERRAT_12
+        imply ZMK_HID_INDICATORS
+
+    choice ZMK_DISPLAY_WORK_QUEUE
+        default ZMK_DISPLAY_WORK_QUEUE_DEDICATED
+    endchoice
+
+    config LV_Z_MEM_POOL_SIZE
+        default 4096
+
+    config LV_Z_VDB_SIZE
+        default 100
+
+    config LV_DPI_DEF
+        default 161
+
+    config LV_Z_BITS_PER_PIXEL
+        default 1
+
+    choice LV_COLOR_DEPTH
+        default LV_COLOR_DEPTH_1
+    endchoice
+
+endif #SHIELD_NICE_PERI_VIEW
