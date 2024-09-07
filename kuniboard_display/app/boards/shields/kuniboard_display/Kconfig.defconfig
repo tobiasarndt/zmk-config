@@ -1,6 +1,10 @@
 # Copyright (c) 2024 ZMK
 # SPDX-License-Identifier: MIT
 
+config USE_KUNIBOARD_DISPLAY
+    bool "use the kunobiard custom display"
+    default y
+
 config KUNIBOARD_DISPLAY_ROTATE_CLOCKWISE
     bool "rotate the display counterclockwise"
     default n
@@ -9,15 +13,19 @@ config KUNIBOARD_DISPLAY_RIGHT_SIDE_CENTRAL
     bool "right side central"
     default n
 
-config KUNIBOARD_DISPLAY_SHOW_SLEEP_ART_ON_SLEEP
+config KUNIBOARD_DISPLAY_SHOW_SLEEP_ART_ON_IDLE
     bool "whether the sleep art should be shown on idle"
+    default y
+
+config KUNIBOARD_DISPLAY_SHOW_SLEEP_ART_ON_SLEEP
+    bool "whether the sleep art should be shown on sleep"
     default y
 
 config KUNIBOARD_SCREEN_INVERTED
     bool "invert kuniboard display color"
     default n
 
-if SHIELD_NICE_PERI_VIEW
+if USE_KUNIBOARD_DISPLAY
 
     config ZMK_DISPLAY
         select KUNIBOARD_DISPLAY
@@ -60,4 +68,4 @@ if SHIELD_NICE_PERI_VIEW
         default LV_COLOR_DEPTH_1
     endchoice
 
-endif #SHIELD_NICE_PERI_VIEW
+endif #KUNIBOARD_DISPLAY

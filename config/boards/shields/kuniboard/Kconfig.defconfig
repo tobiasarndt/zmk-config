@@ -8,10 +8,12 @@ config ZMK_KEYBOARD_NAME
 
 config ZMK_SPLIT_ROLE_CENTRAL
 	default y
-endif
+
+endif #SHIELD_KUNIBOARD_LEFT
 
 if SHIELD_KUNIBOARD_LEFT || SHIELD_KUNIBOARD_RIGHT
 
 config ZMK_SPLIT
 	default y
+
 endif

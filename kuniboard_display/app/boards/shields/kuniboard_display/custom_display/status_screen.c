@@ -13,24 +13,14 @@
 #include <zmk/events/activity_state_changed.h>
 #include <zmk/events/split_peripheral_status_changed.h>
 #include <lvgl.h>
-
 #include <zephyr/logging/log.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static struct zmk_widget_output_status output_status_widget;
-
-#if IS_ENABLED(CONFIG_ZMK_WIDGET_PERIPHERAL_STATUS)
-static struct zmk_widget_peripheral_status peripheral_status_widget;
-#endif
-
 static struct zmk_widget_layer_status layer_status_widget;
 static struct zmk_widget_connection_status connection_status_widget;
 static struct zmk_widget_batteries_status batteries_status_widget;
 static struct zmk_widget_sleep_status sleep_status_widget;
-
-#if IS_ENABLED(CONFIG_ZMK_WIDGET_WPM_STATUS)
-static struct zmk_widget_wpm_status wpm_status_widget;
-#endif
 
 lv_obj_t *zmk_display_status_screen() {
     lv_obj_t *screen;
@@ -46,7 +36,7 @@ lv_obj_t *zmk_display_status_screen() {
 
     zmk_widget_sleep_status_init(&sleep_status_widget, screen);
 
-#if !CONFIG_NICE_PERI_VIEW_ROTATE_DISPLAY
+#if !CONFIG_KUNIBOARD_DISPLAY_ROTATE_CLOCKWISE
     lv_obj_align(zmk_widget_output_status_obj(&output_status_widget), LV_ALIGN_BOTTOM_RIGHT, 0, 0);
     lv_obj_align(zmk_widget_layer_status_obj(&layer_status_widget), LV_ALIGN_BOTTOM_LEFT, 0, 0);
     lv_obj_align(zmk_widget_connection_status_obj(&connection_status_widget), LV_ALIGN_BOTTOM_RIGHT,
