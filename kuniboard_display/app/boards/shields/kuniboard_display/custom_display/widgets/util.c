@@ -13,7 +13,7 @@
 void rotate_canvas(lv_obj_t *canvas, lv_color_t cbuf[], lv_color_t cbuf_rot[], uint8_t width,
                    uint8_t height) {
 
-#if !CONFIG_NICE_PERI_VIEW_ROTATE_DISPLAY
+#if CONFIG_KUNIBOARD_DISPLAY_ROTATE_CLOCKWISE
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             cbuf_rot[i * height + (height - 1 - j)] = cbuf[i + j * width];

@@ -66,7 +66,7 @@ static void draw_batteries_widget(struct zmk_widget_batteries_status *widget) {
                          LV_IMG_CF_TRUE_COLOR);
 
     lv_canvas_fill_bg(widget->canvas, LVGL_BACKGROUND, LV_OPA_COVER);
-    #if CONFIG_NICE_PERI_VIEW_RIGHT_SIDE_CENTRAL
+    #if CONFIG_RIGHT_SIDE_CENTRAL
     lv_canvas_draw_text(widget->canvas, 35, 0, 33, &widget->central_label_dsc, widget->central_text);
     if (widget->connected) {
         lv_canvas_draw_text(widget->canvas, 0, 0, 33, &widget->peripheral_label_dsc,
@@ -163,7 +163,7 @@ int zmk_widget_batteries_status_init(struct zmk_widget_batteries_status *widget,
     sys_slist_append(&widgets, &widget->node);
     widget->canvas = lv_canvas_create(parent);
 
-#if CONFIG_NICE_PERI_VIEW_RIGHT_SIDE_CENTRAL
+#if CONFIG_RIGHT_SIDE_CENTRAL
     init_label_dsc(&widget->central_label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_12,
                    LV_TEXT_ALIGN_RIGHT);
     init_label_dsc(&widget->peripheral_label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_12,

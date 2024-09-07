@@ -21,14 +21,14 @@ LV_IMG_DECLARE(sleepbert);
 
 static void set_sleep_img(struct zmk_widget_sleep_status *widget,
                           struct zmk_activity_state_changed ev) {
+    LOG_DBG("ACTIVITY EVENT");
     switch (ev.state) {
     case ZMK_ACTIVITY_ACTIVE:
-        LOG_DBG("ACTIVITY EVENT ACTIVE");
         lv_obj_add_flag(widget->art, LV_OBJ_FLAG_HIDDEN);
         break;
     case ZMK_ACTIVITY_IDLE:
-        LOG_DBG("ACTIVITY EVENT IDLE");
-#if IS_ENABLED(CONFIG_NICE_PERI_VIEW_SHOW_SLEEP_ART_ON_IDLE)
+    LOG_DBG("ACTIVITY EVENT IDLE");
+#if CONFIG_KUNIBOARD_DISPLAY_SHOW_SLEEP_ART_ON_IDLE
         lv_obj_clear_flag(widget->art, LV_OBJ_FLAG_HIDDEN);
 #else
         lv_obj_add_flag(widget->art, LV_OBJ_FLAG_HIDDEN);
@@ -36,12 +36,11 @@ static void set_sleep_img(struct zmk_widget_sleep_status *widget,
         break;
     case ZMK_ACTIVITY_SLEEP:
         LOG_DBG("ACTIVITY EVENT SLEEP");
-#if IS_ENABLED(CONFIG_NICE_PERI_VIEW_SHOW_SLEEP_ART_ON_SLEEP)
+#if CONFIG_KUNIBOARD_DISPLAY_SHOW_SLEEP_ART_ON_SLEEP
         lv_obj_clear_flag(widget->art, LV_OBJ_FLAG_HIDDEN);
 #else
         lv_obj_add_flag(widget->art, LV_OBJ_FLAG_HIDDEN);
 #endif
-        break;
     default:
         LOG_WRN("Unhandled activity state: %d", ev.state);
     }

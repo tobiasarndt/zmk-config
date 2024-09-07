@@ -59,18 +59,18 @@ int zmk_widget_connection_status_init(struct zmk_widget_connection_status *widge
     lv_img_set_src(widget->art, &keyboard_pictogram_large);
     lv_obj_align(widget->art, LV_ALIGN_TOP_LEFT, 0, 0);
     widget->not_connected = lv_img_create(widget->obj);
-#if CONFIG_NICE_PERI_VIEW_RIGHT_SIDE_CENTRAL
+#if CONFIG_RIGHT_SIDE_CENTRAL
     lv_img_set_src(widget->not_connected, &not_connected_pictogram_large_left);
-#if !CONFIG_NICE_PERI_VIEW_ROTATE_DISPLAY
+#if CONFIG_KUNIBOARD_DISPLAY_ROTATE_CLOCKWISE
     lv_obj_align(widget->not_connected, LV_ALIGN_TOP_LEFT, 0, 0);
 #else
     lv_obj_align(widget->not_connected, LV_ALIGN_BOTTOM_LEFT, 0, 0);
 #endif
 #else
     lv_img_set_src(widget->not_connected, &not_connected_pictogram_large);
-#if !CONFIG_NICE_PERI_VIEW_ROTATE_DISPLAY
+#if CONFIG_KUNIBOARD_DISPLAY_ROTATE_CLOCKWISE
     lv_obj_align(widget->not_connected, LV_ALIGN_BOTTOM_LEFT, 0, 0);
-#else
+#else  
     lv_obj_align(widget->not_connected, LV_ALIGN_TOP_LEFT, 0, 0);
 #endif
 #endif
