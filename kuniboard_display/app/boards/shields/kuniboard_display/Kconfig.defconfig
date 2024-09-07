@@ -9,11 +9,11 @@ config KUNIBOARD_DISPLAY_RIGHT_SIDE_CENTRAL
     bool "right side central"
     default n
 
-CONFIG KUNIBOARD_DISPLAY_SHOW_SLEEP_ART_ON_SLEEP
+config KUNIBOARD_DISPLAY_SHOW_SLEEP_ART_ON_SLEEP
     bool "whether the sleep art should be shown on idle"
     default y
 
-CONFIG_KUNIBOARD_SCREEN_INVERTED
+config KUNIBOARD_SCREEN_INVERTED
     bool "invert kuniboard display color"
     default n
 

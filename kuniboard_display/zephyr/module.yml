@@ -1,0 +1,4 @@
+build:
+  settings:
+    dts_root: app/
+    board_root: app/

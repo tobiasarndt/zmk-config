@@ -12,9 +12,9 @@
 #define LAYER_HEIGHT 68
 
 #define LVGL_BACKGROUND \
-    IS_ENABLED(CONFIG_KUNIBOARD_SCREEN_INVERTED) ? lv_color_black() : lv_color_white()
+    IS_ENABLED(CONFIG_NICE_PERI_VIEW_SCREEN_INVERTED) ? lv_color_black() : lv_color_white()
 #define LVGL_FOREGROUND \
-    IS_ENABLED(CONFIG_KUNIBOARD_SCREEN_INVERTED) ? lv_color_white() : lv_color_black()
+    IS_ENABLED(CONFIG_NICE_PERI_VIEW_SCREEN_INVERTED) ? lv_color_white() : lv_color_black()
 
 struct status_state
 {
