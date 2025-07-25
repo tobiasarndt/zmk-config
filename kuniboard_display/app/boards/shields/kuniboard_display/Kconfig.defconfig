@@ -15,7 +15,7 @@ config KUNIBOARD_DISPLAY_RIGHT_SIDE_CENTRAL
 
 config KUNIBOARD_DISPLAY_SHOW_SLEEP_ART_ON_IDLE
     bool "whether the sleep art should be shown on idle"
-    default y
+    default n
 
 config KUNIBOARD_DISPLAY_SHOW_SLEEP_ART_ON_SLEEP
     bool "whether the sleep art should be shown on sleep"
