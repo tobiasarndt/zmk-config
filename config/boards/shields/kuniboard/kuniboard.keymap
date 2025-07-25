@@ -25,6 +25,7 @@
 #define MOD_OSX 4
 #define NUM_OSX 5
 #define ADJ 6
+#define GAME 7
 
 ZMK_BEHAVIOR(hml, hold_tap,
     flavor = "balanced";
@@ -182,6 +183,12 @@ ZMK_BEHAVIOR(hmr, hold_tap,
             layers = <0>;
             require-prior-idle-ms = <1000>;
         };
+        exit_game {
+            timeout-ms = <50>;
+            key-positions = <LH2 LH1 LH0>;
+            bindings = <&to BASE>;
+            layers = <GAME>;
+        };
     };
 };
 
@@ -244,7 +251,7 @@ ZMK_BEHAVIOR(hmr, hold_tap,
         };
 
         base_osx_layer {
-            display-name = "ColemakOSX";
+            display-name = "Base OSX";
             bindings = <
                 &kp DE_OSX_Q        &kp DE_OSX_W        &kp DE_OSX_F        &kp DE_OSX_P        &kp DE_OSX_B        &kp DE_OSX_J        &kp DE_OSX_L        &kp DE_OSX_U        &kp DE_OSX_Z        &slh_qu   
                 &hml LGUI DE_OSX_A  &hml LALT DE_OSX_S  &hml LCTRL DE_OSX_R &hml LSHFT DE_OSX_T &kp DE_OSX_G        &kp DE_OSX_M        &hml RSHFT DE_OSX_N &hml RCTRL DE_OSX_E &hml RALT DE_OSX_I  &hml RGUI DE_OSX_O
@@ -254,7 +261,7 @@ ZMK_BEHAVIOR(hmr, hold_tap,
         };
 
         mod_osx_layer {
-            display-name = "Umlaute and Modifiers OSX";
+            display-name = "Sym OSX";
             bindings = <
                 &kp DE_OSX_AT       &quote              &acu_grv            &kp DE_OSX_DLLR     &kp DE_OSX_PRCNT    &kp DE_OSX_AMPS     &kp DE_OSX_L        &kp DE_OSX_UE       &kp DE_OSX_Z        &kp DE_OSX_BSLH   
                 &kp DE_OSX_AE       &sz                 &trans              &kp LEFT            &kp UP              &kp DOWN            &kp RIGHT           &kp DE_OSX_N        &kp DE_OSX_HASH     &kp DE_OSX_OE
@@ -264,7 +271,7 @@ ZMK_BEHAVIOR(hmr, hold_tap,
         };
 
         num_osx_layer {
-            display-name = "Numbers OSX";
+            display-name = "Num OSX";
             bindings = <
                 &kp DE_OSX_N1       &kp DE_OSX_N2       &kp DE_OSX_N3       &trans              &trans              &kp DE_OSX_EQUAL    &kp DE_OSX_PLUS     &kp DE_OSX_MINUS    &kp DE_OSX_ASTRK    &trans   
                 &kp DE_OSX_N4       &kp DE_OSX_N5       &kp DE_OSX_N6       &kp HOME            &kp PG_UP           &kp PG_DN           &kp END             &trans              &trans              &trans
@@ -276,10 +283,20 @@ ZMK_BEHAVIOR(hmr, hold_tap,
         adj_layer {
             display-name = "Fun";
             bindings = <
-                &kp F1          &kp F2          &kp F3          &kp F10         &bt BT_NXT      &tog BASE_OSX   &trans          &trans          &trans          &kp PSCRN
-                &kp F4          &kp F5          &kp F6          &kp F11         &bt BT_PRV      &out OUT_TOG    &trans          &trans          &kp INSERT      &trans
+                &kp F1          &kp F2          &kp F3          &kp F10         &bt BT_NXT      &tog BASE_OSX   &tog GAME       &trans          &trans          &kp PSCRN
+                &kp F4          &kp F5          &kp F6          &kp F11         &bt BT_PRV      &out OUT_TOG    &trans          &trans          &kp INSERT      &kp INS
                 &kp F7          &kp F8          &kp F9          &kp F12         &bt BT_CLR      &bt BT_CLR_ALL  &trans          &trans          &trans          &trans
                                 &trans          &trans          &trans          &trans          &trans          &trans
+            >;
+        };
+
+        gaming_layer {
+            display-name = "Gaming";
+            bindings = <
+                &kp DE_Q        &kp DE_W        &kp DE_F        &kp DE_P        &kp DE_B        &kp DE_J        &kp DE_L        &kp DE_U        &kp DE_Z        &kp DE_FSLH
+                &kp DE_A        &kp DE_S        &kp DE_R        &kp DE_T        &kp DE_G        &kp DE_M        &kp DE_N        &kp DE_E        &kp DE_I        &kp DE_O
+                &kp DE_Y        &kp DE_X        &kp DE_C        &kp DE_D        &kp DE_V        &kp DE_K        &kp DE_H        &kp DE_COMMA    &kp DE_DOT      &kp DE_MINUS
+                                &kp TAB         &kp BSPC        &kp ENTER       &kp DEL         &kp SPACE       &kp ESC
             >;
         };
     };
