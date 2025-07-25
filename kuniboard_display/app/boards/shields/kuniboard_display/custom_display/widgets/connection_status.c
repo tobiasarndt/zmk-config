@@ -12,7 +12,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/event_manager.h>
 #include <zmk/endpoints.h>
 #include <zmk/keymap.h>
-#include <zmk/events/split_peripheral_status_changed.h>
+#include <zmk/events/split_central_peripheral_status_changed.h>
 #include "connection_status.h"
 #include "util.h"
 
@@ -41,14 +41,17 @@ static void connection_status_update_cb(struct connection_status_state state) {
 }
 
 static struct connection_status_state connection_status_get_state(const zmk_event_t *eh) {
-    struct zmk_split_peripheral_status_changed *ev = as_zmk_split_peripheral_status_changed(eh);
-    return (struct connection_status_state){.connected = ev->connected};
+    struct zmk_split_central_peripheral_status_changed *ev =
+        as_zmk_split_central_peripheral_status_changed(eh);
+    return (struct connection_status_state){
+        .connected = ev->state == PERIPHERAL_SLOT_STATE_CONNECTED
+    };
 }
 
 ZMK_DISPLAY_WIDGET_LISTENER(widget_connection_status, struct connection_status_state,
                             connection_status_update_cb, connection_status_get_state)
 
-ZMK_SUBSCRIPTION(widget_connection_status, zmk_split_peripheral_status_changed);
+ZMK_SUBSCRIPTION(widget_connection_status, zmk_split_central_peripheral_status_changed);
 
 int zmk_widget_connection_status_init(struct zmk_widget_connection_status *widget,
                                       lv_obj_t *parent) {
