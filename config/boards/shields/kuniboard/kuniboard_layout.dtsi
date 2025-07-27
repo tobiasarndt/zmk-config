@@ -1,0 +1,47 @@
+#include <physical_layouts.dtsi>
+/ {
+    physical_layout0: physical_layout_0 {
+        compatible = "zmk,physical-layout";
+        display-name = "Default Layout";
+        transform = <&default_transform>;
+        kscan = <&kscan0>;
+        keys =
+            <&key_physical_attrs 100 100 0 0 0 0 0>, // Left half, row 0, col 0
+            <&key_physical_attrs 100 100 100 0 0 0 0>, // Left half, row 0, col 1
+            <&key_physical_attrs 100 100 200 0 0 0 0>, // Left half, row 0, col 2
+            <&key_physical_attrs 100 100 300 0 0 0 0>, // Left half, row 0, col 3
+            <&key_physical_attrs 100 100 400 0 0 0 0>, // Left half, row 0, col 4
+            <&key_physical_attrs 100 100 0 100 0 0 0>, // Left half, row 1, col 0
+            <&key_physical_attrs 100 100 100 100 0 0 0>, // Left half, row 1, col 1
+            <&key_physical_attrs 100 100 200 100 0 0 0>, // Left half, row 1, col 2
+            <&key_physical_attrs 100 100 300 100 0 0 0>, // Left half, row 1, col 3
+            <&key_physical_attrs 100 100 400 100 0 0 0>, // Left half, row 1, col 4
+            <&key_physical_attrs 100 100 0 200 0 0 0>, // Left half, row 2, col 0
+            <&key_physical_attrs 100 100 100 200 0 0 0>, // Left half, row 2, col 1
+            <&key_physical_attrs 100 100 200 200 0 0 0>, // Left half, row 2, col 2
+            <&key_physical_attrs 100 100 300 200 0 0 0>, // Left half, row 2, col 3
+            <&key_physical_attrs 100 100 400 200 0 0 0>, // Left half, row 2, col 4
+            <&key_physical_attrs 100 100 0 300 0 0 0>, // Left thumb button 1
+            <&key_physical_attrs 100 100 150 300 0 0 0>, // Left thumb button 2
+            <&key_physical_attrs 100 100 300 300 0 0 0>, // Left thumb button 3
+            <&key_physical_attrs 100 100 500 0 0 0 0>, // Right half, row 0, col 0
+            <&key_physical_attrs 100 100 600 0 0 0 0>, // Right half, row 0, col 1
+            <&key_physical_attrs 100 100 700 0 0 0 0>, // Right half, row 0, col 2
+            <&key_physical_attrs 100 100 800 0 0 0 0>, // Right half, row 0, col 3
+            <&key_physical_attrs 100 100 900 0 0 0 0>, // Right half, row 0, col 4
+            <&key_physical_attrs 100 100 500 100 0 0 0>, // Right half, row 1, col 0
+            <&key_physical_attrs 100 100 600 100 0 0 0>, // Right half, row 1, col 1
+            <&key_physical_attrs 100 100 700 100 0 0 0>, // Right half, row 1, col 2
+            <&key_physical_attrs 100 100 800 100 0 0 0>, // Right half, row 1, col 3
+            <&key_physical_attrs 100 100 900 100 0 0 0>, // Right half, row 1, col 4
+            <&key_physical_attrs 100 100 500 200 0 0 0>, // Right half, row 2, col 0
+            <&key_physical_attrs 100 100 600 200 0 0 0>, // Right half, row 2, col 1
+            <&key_physical_attrs 100 100 700 200 0 0 0>, // Right half, row 2, col 2
+            <&key_physical_attrs 100 100 800 200 0 0 0>, // Right half, row 2, col 3
+            <&key_physical_attrs 100 100 900 200 0 0 0>, // Right half, row 2, col 4
+            <&key_physical_attrs 100 100 500 300 0 0 0>, // Right thumb button 1
+            <&key_physical_attrs 100 100 650 300 0 0 0>, // Right thumb button 2
+            <&key_physical_attrs 100 100 800 300 0 0 0>  // Right thumb button 3
+        ;
+    };
+};

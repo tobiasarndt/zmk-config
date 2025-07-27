@@ -251,7 +251,7 @@ ZMK_BEHAVIOR(hmr, hold_tap,
         };
 
         base_osx_layer {
-            display-name = "Base OSX";
+            display-name = "OSX";
             bindings = <
                 &kp DE_OSX_Q        &kp DE_OSX_W        &kp DE_OSX_F        &kp DE_OSX_P        &kp DE_OSX_B        &kp DE_OSX_J        &kp DE_OSX_L        &kp DE_OSX_U        &kp DE_OSX_Z        &slh_qu   
                 &hml LGUI DE_OSX_A  &hml LALT DE_OSX_S  &hml LCTRL DE_OSX_R &hml LSHFT DE_OSX_T &kp DE_OSX_G        &kp DE_OSX_M        &hml RSHFT DE_OSX_N &hml RCTRL DE_OSX_E &hml RALT DE_OSX_I  &hml RGUI DE_OSX_O
@@ -261,7 +261,7 @@ ZMK_BEHAVIOR(hmr, hold_tap,
         };
 
         mod_osx_layer {
-            display-name = "Sym OSX";
+            display-name = "Sym";
             bindings = <
                 &kp DE_OSX_AT       &quote              &acu_grv            &kp DE_OSX_DLLR     &kp DE_OSX_PRCNT    &kp DE_OSX_AMPS     &kp DE_OSX_L        &kp DE_OSX_UE       &kp DE_OSX_Z        &kp DE_OSX_BSLH   
                 &kp DE_OSX_AE       &sz                 &trans              &kp LEFT            &kp UP              &kp DOWN            &kp RIGHT           &kp DE_OSX_N        &kp DE_OSX_HASH     &kp DE_OSX_OE
@@ -285,7 +285,7 @@ ZMK_BEHAVIOR(hmr, hold_tap,
             bindings = <
                 &kp F1          &kp F2          &kp F3          &kp F10         &bt BT_NXT      &tog BASE_OSX   &tog GAME       &trans          &trans          &kp PSCRN
                 &kp F4          &kp F5          &kp F6          &kp F11         &bt BT_PRV      &out OUT_TOG    &trans          &trans          &kp INSERT      &kp INS
-                &kp F7          &kp F8          &kp F9          &kp F12         &bt BT_CLR      &bt BT_CLR_ALL  &trans          &trans          &trans          &trans
+                &kp F7          &kp F8          &kp F9          &kp F12         &bt BT_CLR      &bt BT_CLR_ALL  &trans          &trans          &trans          &studio_unlock
                                 &trans          &trans          &trans          &trans          &trans          &trans
             >;
         };
